@@ -1,12 +1,10 @@
 resource "aws_s3_bucket" "mybucket" {
-    bucket = "yohwan-example-bucket"
+  bucket = "yohwan-example-bucket"
 
-#   subnet_id = aws_subnet.example_subnet.id
-
-    tags = {
-        Name = "mybucket"
-        Environment = "test"
-    }
+  tags = {
+    Name        = "mybucket"
+    Environment = "test"
+  }
 }
 
 resource "aws_s3_bucket_policy" "public_access_policy" {
@@ -15,14 +13,14 @@ resource "aws_s3_bucket_policy" "public_access_policy" {
     Id = "testBucketPolicy"
     Statement = [
       {
-        Action = "s3:GetObject"
-        Effect = "Allow"
+        Action    = "s3:GetObject"
+        Effect    = "Allow"
         Principal = "*"
         Resource = [
           aws_s3_bucket.mybucket.arn,
           "${aws_s3_bucket.mybucket.arn}/*",
         ]
-        Sid      = "statement1"
+        Sid = "statement1"
       }
     ]
     Version = "2012-10-17"
